@@ -16,9 +16,8 @@ if os.path.exists("list.txt"):
 def addTask(): 
     task = input("Enter task: ")
     tasks.append([task, False])
-    f = open("list.txt", "a")
-    f.write(task + " | False\n")
-    f.close()
+    with open('list.txt', 'a') as f:
+        f.write(task + " | False\n")
 
 def viewTasks():
     if len(tasks) == 0:
@@ -55,7 +54,7 @@ def removeTask():
     if num.isdigit():
         num = int(num)
         if num > 0 and num <= len(tasks):
-            tasks.pop(num-1)
+            tasks.remove(num-1)
             f = open("list.txt", "w")
             for t in tasks:
                 f.write(t[0] + " | " + str(t[1]) + "\n")
@@ -78,3 +77,4 @@ while True:
         break
     else:
         print("Invalid choice ya Retard!")
+
